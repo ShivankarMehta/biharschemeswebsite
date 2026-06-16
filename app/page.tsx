@@ -310,7 +310,9 @@ export default function Home() {
         ? "This is an informational website, not an official government portal. Scheme amounts, dates, eligibility, and required documents can change. Always verify on the official portal before applying."
         : "\u092f\u0939 \u090f\u0915 \u0938\u0942\u091a\u0928\u093e\u0924\u094d\u092e\u0915 \u0935\u0947\u092c\u0938\u093e\u0907\u091f \u0939\u0948, \u0906\u0927\u093f\u0915\u093e\u0930\u093f\u0915 \u0938\u0930\u0915\u093e\u0930\u0940 \u092a\u094b\u0930\u094d\u091f\u0932 \u0928\u0939\u0940\u0902. \u092f\u094b\u091c\u0928\u093e \u0930\u093e\u0936\u093f, \u0924\u093e\u0930\u0940\u0916, \u092a\u093e\u0924\u094d\u0930\u0924\u093e \u0914\u0930 \u0926\u0938\u094d\u0924\u093e\u0935\u0947\u091c \u092c\u0926\u0932 \u0938\u0915\u0924\u0947 \u0939\u0948\u0902. \u0906\u0935\u0947\u0926\u0928 \u0938\u0947 \u092a\u0939\u0932\u0947 \u0906\u0927\u093f\u0915\u093e\u0930\u093f\u0915 \u092a\u094b\u0930\u094d\u091f\u0932 \u092a\u0930 \u091c\u0930\u0942\u0930 \u091c\u093e\u0902\u091a\u0947\u0902.",
     review: language === "en" ? "Last reviewed: 15 June 2026" : "\u0905\u0902\u0924\u093f\u092e \u0938\u092e\u0940\u0915\u094d\u0937\u093e: 15 \u091c\u0942\u0928 2026",
-    madeFor: language === "en" ? "Made for Bihar residents" : "\u092c\u093f\u0939\u093e\u0930 \u0928\u093f\u0935\u093e\u0938\u093f\u092f\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f"
+    madeFor: language === "en" ? "Made for Bihar residents" : "\u092c\u093f\u0939\u093e\u0930 \u0928\u093f\u0935\u093e\u0938\u093f\u092f\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f",
+    createdBy: language === "en" ? "Created by Shivankar Mehta" : "\u0928\u093f\u0930\u094d\u092e\u093e\u0924\u093e: \u0936\u093f\u0935\u093e\u0902\u0915\u0930 \u092e\u0947\u0939\u0924\u093e",
+    email: "shivankarmehta60@gmail.com"
   };
   const helpSteps = [
     {
@@ -589,6 +591,10 @@ export default function Home() {
           <div>
             <strong>{footerLabels.disclaimer}</strong>
             <p>{footerLabels.disclaimerText}</p>
+            <p className="creator-credit">
+              {footerLabels.createdBy} ·{" "}
+              <a href={`mailto:${footerLabels.email}`}>{footerLabels.email}</a>
+            </p>
           </div>
           <span>{footerLabels.review}</span>
         </div>

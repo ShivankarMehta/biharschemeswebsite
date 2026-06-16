@@ -666,6 +666,18 @@ main {
   color: rgba(234, 243, 238, 0.78);
 }
 
+.footer-bottom .creator-credit {
+  margin-top: 10px;
+  color: #ffd7a8;
+  font-weight: 800;
+}
+
+.creator-credit a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .footer-brand strong {
   color: #ffd7a8;
 }
