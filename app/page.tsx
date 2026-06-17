@@ -65,6 +65,140 @@ const commonDocsHi = [
   "प्रोजेक्ट रिपोर्ट, व्यवसाय योजनाओं के लिए",
   "आवेदन जमा करने के बाद मिली रसीद या आवेदन नंबर"
 ];
+
+const districts = [
+  { id: "araria", nameHi: "अररिया", nameEn: "Araria", website: "https://araria.nic.in" },
+  { id: "arwal", nameHi: "अरवल", nameEn: "Arwal", website: "https://arwal.nic.in" },
+  { id: "aurangabad", nameHi: "औरंगाबाद", nameEn: "Aurangabad", website: "https://aurangabad.bih.nic.in" },
+  { id: "banka", nameHi: "बांका", nameEn: "Banka", website: "https://banka.nic.in" },
+  { id: "begusarai", nameHi: "बेगूसराय", nameEn: "Begusarai", website: "https://begusarai.nic.in" },
+  { id: "bhagalpur", nameHi: "भागलपुर", nameEn: "Bhagalpur", website: "https://bhagalpur.nic.in" },
+  { id: "bhojpur", nameHi: "भोजपुर", nameEn: "Bhojpur", website: "https://bhojpur.nic.in" },
+  { id: "buxar", nameHi: "बक्सर", nameEn: "Buxar", website: "https://buxar.nic.in" },
+  { id: "darbhanga", nameHi: "दरभंगा", nameEn: "Darbhanga", website: "https://darbhanga.nic.in" },
+  { id: "east-champaran", nameHi: "पूर्वी चंपारण", nameEn: "East Champaran", website: "https://eastchamparan.nic.in" },
+  { id: "gaya", nameHi: "गया", nameEn: "Gaya", website: "https://gaya.nic.in" },
+  { id: "gopalganj", nameHi: "गोपालगंज", nameEn: "Gopalganj", website: "https://gopalganj.nic.in" },
+  { id: "jamui", nameHi: "जमुई", nameEn: "Jamui", website: "https://jamui.nic.in" },
+  { id: "jehanabad", nameHi: "जहानाबाद", nameEn: "Jehanabad", website: "https://jehanabad.nic.in" },
+  { id: "kaimur", nameHi: "कैमूर", nameEn: "Kaimur", website: "https://kaimur.nic.in" },
+  { id: "katihar", nameHi: "कटिहार", nameEn: "Katihar", website: "https://katihar.nic.in" },
+  { id: "khagaria", nameHi: "खगड़िया", nameEn: "Khagaria", website: "https://khagaria.nic.in" },
+  { id: "kishanganj", nameHi: "किशनगंज", nameEn: "Kishanganj", website: "https://kishanganj.nic.in" },
+  { id: "lakhisarai", nameHi: "लखीसराय", nameEn: "Lakhisarai", website: "https://lakhisarai.nic.in" },
+  { id: "madhepura", nameHi: "मधेपुरा", nameEn: "Madhepura", website: "https://madhepura.nic.in" },
+  { id: "madhubani", nameHi: "मधुबनी", nameEn: "Madhubani", website: "https://madhubani.nic.in" },
+  { id: "munger", nameHi: "मुंगेर", nameEn: "Munger", website: "https://munger.nic.in" },
+  { id: "muzaffarpur", nameHi: "मुजफ्फरपुर", nameEn: "Muzaffarpur", website: "https://muzaffarpur.nic.in" },
+  { id: "nalanda", nameHi: "नालंदा", nameEn: "Nalanda", website: "https://nalanda.nic.in" },
+  { id: "nawada", nameHi: "नवादा", nameEn: "Nawada", website: "https://nawada.nic.in" },
+  { id: "patna", nameHi: "पटना", nameEn: "Patna", website: "https://patna.nic.in" },
+  { id: "purnea", nameHi: "पूर्णिया", nameEn: "Purnea", website: "https://purnea.nic.in" },
+  { id: "rohtas", nameHi: "रोहतास", nameEn: "Rohtas", website: "https://rohtas.nic.in" },
+  { id: "saharsa", nameHi: "सहरसा", nameEn: "Saharsa", website: "https://saharsa.nic.in" },
+  { id: "samastipur", nameHi: "समस्तीपुर", nameEn: "Samastipur", website: "https://samastipur.nic.in" },
+  { id: "saran", nameHi: "सारण", nameEn: "Saran", website: "https://saran.nic.in" },
+  { id: "sheikhpura", nameHi: "शेखपुरा", nameEn: "Sheikhpura", website: "https://sheikhpura.nic.in" },
+  { id: "sheohar", nameHi: "शिवहर", nameEn: "Sheohar", website: "https://sheohar.nic.in" },
+  { id: "sitamarhi", nameHi: "सीतामढ़ी", nameEn: "Sitamarhi", website: "https://sitamarhi.nic.in" },
+  { id: "siwan", nameHi: "सिवान", nameEn: "Siwan", website: "https://siwan.nic.in" },
+  { id: "supaul", nameHi: "सुपौल", nameEn: "Supaul", website: "https://supaul.nic.in" },
+  { id: "vaishali", nameHi: "वैशाली", nameEn: "Vaishali", website: "https://vaishali.nic.in" },
+  { id: "west-champaran", nameHi: "पश्चिमी चंपारण", nameEn: "West Champaran", website: "https://westchamparan.nic.in" }
+];
+
+const officeGuidanceByCategory: Record<
+  string,
+  {
+    officeHi: string;
+    officeEn: string;
+    officerHi: string;
+    officerEn: string;
+    hintHi: string;
+    hintEn: string;
+  }
+> = {
+  education: {
+    officeHi: "जिला शिक्षा कार्यालय या DRCC केंद्र",
+    officeEn: "District Education Office or DRCC centre",
+    officerHi: "जिला शिक्षा पदाधिकारी, DRCC प्रबंधक या छात्रवृत्ति प्रभारी",
+    officerEn: "District Education Officer, DRCC Manager, or scholarship officer",
+    hintHi: "छात्र योजना में स्कूल/कॉलेज से प्रमाण पत्र और जिला शिक्षा/DRCC सत्यापन की जरूरत पड़ सकती है।",
+    hintEn: "Student schemes may need school/college proof and verification through the education office or DRCC."
+  },
+  youth: {
+    officeHi: "DRCC केंद्र, जिला नियोजनालय या कौशल प्रशिक्षण केंद्र",
+    officeEn: "DRCC centre, District Employment Exchange, or skill centre",
+    officerHi: "DRCC प्रबंधक, जिला नियोजन पदाधिकारी या केंद्र समन्वयक",
+    officerEn: "DRCC Manager, District Employment Officer, or centre coordinator",
+    hintHi: "युवा योजनाओं में उम्र, पढ़ाई और बेरोजगारी/प्रशिक्षण से जुड़े कागज पूछे जा सकते हैं।",
+    hintEn: "Youth schemes may ask for age, education, unemployment, or training-related documents."
+  },
+  women: {
+    officeHi: "जिला कार्यक्रम कार्यालय ICDS, आंगनवाड़ी केंद्र या जिला कल्याण कार्यालय",
+    officeEn: "District Programme Office ICDS, Anganwadi centre, or District Welfare Office",
+    officerHi: "CDPO, आंगनवाड़ी सेविका, जिला कार्यक्रम पदाधिकारी या कल्याण पदाधिकारी",
+    officerEn: "CDPO, Anganwadi worker, District Programme Officer, or Welfare Officer",
+    hintHi: "महिला और बाल योजनाओं में आंगनवाड़ी/स्वास्थ्य केंद्र से फॉर्म और सत्यापन में मदद मिलती है।",
+    hintEn: "Women and child schemes are often supported through Anganwadi or health-centre verification."
+  },
+  farmers: {
+    officeHi: "जिला कृषि कार्यालय, प्रखंड कृषि कार्यालय या किसान सलाहकार केंद्र",
+    officeEn: "District Agriculture Office, Block Agriculture Office, or farmer advisory centre",
+    officerHi: "जिला कृषि पदाधिकारी, प्रखंड कृषि पदाधिकारी या किसान सलाहकार",
+    officerEn: "District Agriculture Officer, Block Agriculture Officer, or farmer advisor",
+    hintHi: "किसान योजनाओं में किसान पंजीकरण, जमीन रिकॉर्ड, बैंक और e-KYC सही होना जरूरी है।",
+    hintEn: "Farmer schemes usually need farmer registration, land records, bank details, and e-KYC."
+  },
+  health: {
+    officeHi: "जिला स्वास्थ्य समिति, सिविल सर्जन कार्यालय या सूचीबद्ध अस्पताल का आयुष्मान हेल्प डेस्क",
+    officeEn: "District Health Society, Civil Surgeon Office, or Ayushman help desk at an empanelled hospital",
+    officerHi: "सिविल सर्जन, जिला कार्यक्रम समन्वयक या आयुष्मान मित्र",
+    officerEn: "Civil Surgeon, District Programme Coordinator, or Ayushman Mitra",
+    hintHi: "इलाज वाली योजना में पहले पात्रता, कार्ड और अस्पताल की सूची जांच लें।",
+    hintEn: "For health schemes, check eligibility, card status, and hospital empanelment first."
+  },
+  housing: {
+    officeHi: "प्रखंड विकास कार्यालय, पंचायत कार्यालय या नगर निकाय कार्यालय",
+    officeEn: "Block Development Office, Panchayat Office, or urban local body office",
+    officerHi: "BDO, पंचायत सचिव, ग्रामीण आवास सहायक या नगर निकाय कार्यपालक पदाधिकारी",
+    officerEn: "BDO, Panchayat Secretary, Rural Housing Assistant, or Executive Officer of the urban body",
+    hintHi: "आवास योजनाओं में लाभार्थी सूची, ग्राम सभा/स्थानीय सत्यापन और बैंक जानकारी महत्वपूर्ण होती है।",
+    hintEn: "Housing schemes depend on beneficiary lists, local verification, and correct bank details."
+  },
+  pension: {
+    officeHi: "प्रखंड कार्यालय, RTPS काउंटर या जिला सामाजिक सुरक्षा कोषांग",
+    officeEn: "Block Office, RTPS counter, or District Social Security Cell",
+    officerHi: "BDO, सामाजिक सुरक्षा सहायक निदेशक या पंचायत सचिव",
+    officerEn: "BDO, Assistant Director Social Security, or Panchayat Secretary",
+    hintHi: "पेंशन योजनाओं में उम्र, विधवा/दिव्यांग प्रमाण और बैंक खाता सही होना जरूरी है।",
+    hintEn: "Pension schemes need age, widow/disability proof where applicable, and correct bank details."
+  },
+  food: {
+    officeHi: "प्रखंड आपूर्ति कार्यालय, अनुमंडल आपूर्ति कार्यालय या PDS दुकान",
+    officeEn: "Block Supply Office, Sub-Divisional Supply Office, or PDS shop",
+    officerHi: "प्रखंड आपूर्ति पदाधिकारी, अनुमंडल पदाधिकारी या जिला आपूर्ति पदाधिकारी",
+    officerEn: "Block Supply Officer, Sub-Divisional Officer, or District Supply Officer",
+    hintHi: "राशन कार्ड में परिवार के सभी सदस्यों का आधार और सही पता अपडेट रखें।",
+    hintEn: "For ration services, keep Aadhaar and address details updated for all family members."
+  },
+  business: {
+    officeHi: "जिला उद्योग केंद्र, बैंक शाखा, KVIC/KVIB कार्यालय या उद्यम सहायता केंद्र",
+    officeEn: "District Industries Centre, bank branch, KVIC/KVIB office, or enterprise support centre",
+    officerHi: "जिला उद्योग केंद्र के महाप्रबंधक, लीड बैंक मैनेजर या बैंक शाखा प्रबंधक",
+    officerEn: "General Manager DIC, Lead Bank Manager, or bank branch manager",
+    hintHi: "व्यवसाय योजनाओं में प्रोजेक्ट रिपोर्ट, प्रशिक्षण, बैंक स्वीकृति और श्रेणी प्रमाण पूछे जा सकते हैं।",
+    hintEn: "Business schemes may need project reports, training, bank approval, and category proof."
+  },
+  workers: {
+    officeHi: "जिला श्रम कार्यालय, CSC केंद्र, पंचायत कार्यालय या नगर निकाय कार्यालय",
+    officeEn: "District Labour Office, CSC centre, Panchayat Office, or urban local body office",
+    officerHi: "श्रम अधीक्षक, CSC ऑपरेटर, पंचायत सचिव या नगर निकाय नोडल पदाधिकारी",
+    officerEn: "Labour Superintendent, CSC operator, Panchayat Secretary, or urban body nodal officer",
+    hintHi: "श्रमिक योजनाओं में काम का प्रकार, उम्र, बैंक खाता और मोबाइल नंबर सही रखें।",
+    hintEn: "Worker schemes usually need work details, age, bank account, and a working mobile number."
+  }
+};
 const easySchemeInfo: Record<string, { nameHi: string; easyHi: string; easyEn: string }> = {
   "bihar-student-credit-card": {
     nameHi: "बिहार स्टूडेंट क्रेडिट कार्ड योजना",
@@ -270,11 +404,17 @@ function getSimplePointsHi() {
   ];
 }
 
+function getOfficeGuidance(scheme: Scheme) {
+  return officeGuidanceByCategory[scheme.category] ?? officeGuidanceByCategory.workers;
+}
+
 export default function Home() {
   const [language, setLanguage] = useState<Language>("hi");
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeGovernment, setActiveGovernment] = useState<"all" | "state" | "central">("all");
   const [query, setQuery] = useState("");
+  const [selectedDistrictId, setSelectedDistrictId] = useState("patna");
+  const selectedDistrict = districts.find((district) => district.id === selectedDistrictId) ?? districts[25];
 
   const text = language === "hi" ? cleanHindiCopy : copy.en;
 
@@ -286,6 +426,7 @@ export default function Home() {
     home: language === "en" ? "Home" : "\u0939\u094b\u092e",
     allSchemes: language === "en" ? "Bihar schemes" : "\u092c\u093f\u0939\u093e\u0930 \u092f\u094b\u091c\u0928\u093e\u090f\u0902",
     documents: language === "en" ? "Documents" : "\u0926\u0938\u094d\u0924\u093e\u0935\u0947\u091c",
+    offices: language === "en" ? "District offices" : "जिला कार्यालय",
     listTitle: language === "en" ? "Schemes for people of Bihar" : "\u092c\u093f\u0939\u093e\u0930 \u0915\u0947 \u0932\u094b\u0917\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u092f\u094b\u091c\u0928\u093e\u090f\u0902",
     listHelp:
       language === "en"
@@ -294,6 +435,36 @@ export default function Home() {
     showing: language === "en" ? "Showing" : "\u0926\u093f\u0916 \u0930\u0939\u0940 \u0939\u0948\u0902",
     of: language === "en" ? "of" : "\u0915\u0941\u0932",
     schemes: language === "en" ? "schemes" : "\u092f\u094b\u091c\u0928\u093e\u090f\u0902"
+  };
+  const officeLabels = {
+    kicker: language === "en" ? "District help" : "जिले में सहायता",
+    title:
+      language === "en"
+        ? "Choose your district and know which office to visit"
+        : "अपना जिला चुनें और समझें किस कार्यालय में जाना है",
+    intro:
+      language === "en"
+        ? "Most schemes are applied online, but document checking or help is usually available at district, block, panchayat, DRCC, agriculture, health, labour, supply, or industry offices."
+        : "ज्यादातर योजनाओं में आवेदन ऑनलाइन होता है, लेकिन कागज जांच, सुधार या मदद के लिए जिला, प्रखंड, पंचायत, DRCC, कृषि, स्वास्थ्य, श्रम, आपूर्ति या उद्योग कार्यालय जाना पड़ सकता है।",
+    chooseDistrict: language === "en" ? "Select district" : "जिला चुनें",
+    officialSite: language === "en" ? "Official district website" : "आधिकारिक जिला वेबसाइट",
+    contactPage: language === "en" ? "Contact / directory page" : "संपर्क / कार्यालय निर्देशिका",
+    mainOffice: language === "en" ? "Main office to start" : "सबसे पहले यहां पूछें",
+    mainOfficeText:
+      language === "en"
+        ? "District Collectorate / DM Office help desk, or the department office mentioned in the scheme card."
+        : "जिला समाहरणालय / DM कार्यालय के हेल्प डेस्क, या योजना कार्ड में लिखे संबंधित विभाग के कार्यालय में पूछें।",
+    person: language === "en" ? "Person or role to ask for" : "किस व्यक्ति/पद से बात करें",
+    office: language === "en" ? "Office to visit" : "कहां जाएं",
+    note:
+      language === "en"
+        ? "Officer names and phone numbers change often. Use the district contact page for the latest name, phone number, email, and room address."
+        : "अधिकारी का नाम और फोन नंबर बदलता रहता है। सबसे सही नाम, फोन, ईमेल और कमरे का पता जानने के लिए जिले की संपर्क पेज खोलें।",
+    schemeOfficeTitle: language === "en" ? "Office help for this scheme" : "इस योजना के लिए कार्यालय सहायता",
+    schemeHint:
+      language === "en"
+        ? "Take your documents and ask for the role below in your district/block office."
+        : "अपने कागज लेकर अपने जिला/प्रखंड के इसी विभाग में जाएं और नीचे लिखे पद के व्यक्ति से पूछें।"
   };
   const footerLabels = {
     title: language === "en" ? "Bihar Scheme for People of Bihar" : "\u092c\u093f\u0939\u093e\u0930 \u0915\u0947 \u0932\u094b\u0917\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u092f\u094b\u091c\u0928\u093e\u090f\u0902",
@@ -368,6 +539,7 @@ export default function Home() {
           <div className="site-menu">
             <a href="#top">{menuLabels.home}</a>
             <a href="#schemeList">{menuLabels.allSchemes}</a>
+            <a href="#districtOffices">{menuLabels.offices}</a>
             <a href="#quickHelp">{menuLabels.documents}</a>
             <details className="scheme-menu">
               <summary>{menuLabels.menu}</summary>
@@ -515,9 +687,66 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="district-office-panel" id="districtOffices">
+          <div className="district-office-panel__intro">
+            <div>
+              <p className="section-kicker">{officeLabels.kicker}</p>
+              <h2>{officeLabels.title}</h2>
+              <p>{officeLabels.intro}</p>
+            </div>
+            <label className="district-select">
+              <span>{officeLabels.chooseDistrict}</span>
+              <select value={selectedDistrictId} onChange={(event) => setSelectedDistrictId(event.target.value)}>
+                {districts.map((district) => (
+                  <option value={district.id} key={district.id}>
+                    {language === "hi" ? district.nameHi : district.nameEn}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className="district-contact-card">
+            <div>
+              <h3>{language === "hi" ? selectedDistrict.nameHi : selectedDistrict.nameEn}</h3>
+              <p>
+                <strong>{officeLabels.mainOffice}:</strong> {officeLabels.mainOfficeText}
+              </p>
+              <p>{officeLabels.note}</p>
+            </div>
+            <div className="district-contact-card__actions">
+              <a href={selectedDistrict.website} target="_blank" rel="noopener noreferrer">
+                {officeLabels.officialSite}
+              </a>
+              <a href={`${selectedDistrict.website}/contact-us/`} target="_blank" rel="noopener noreferrer">
+                {officeLabels.contactPage}
+              </a>
+            </div>
+          </div>
+
+          <div className="office-type-grid">
+            {categories.map((category) => {
+              const guidance = officeGuidanceByCategory[category.id];
+              if (!guidance) return null;
+              return (
+                <article className="office-type-card" key={category.id}>
+                  <h3>{getCategoryDisplayName(category, language)}</h3>
+                  <p>
+                    <strong>{officeLabels.office}:</strong> {language === "hi" ? guidance.officeHi : guidance.officeEn}
+                  </p>
+                  <p>
+                    <strong>{officeLabels.person}:</strong>{" "}
+                    {language === "hi" ? guidance.officerHi : guidance.officerEn}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
         <section className="scheme-grid" aria-live="polite">
           {visibleSchemes.map((scheme) => (
-            <SchemeCard scheme={scheme} language={language} key={scheme.id} />
+            <SchemeCard scheme={scheme} language={language} officeLabels={officeLabels} key={scheme.id} />
           ))}
         </section>
 
@@ -550,6 +779,7 @@ export default function Home() {
             <h3>{footerLabels.quickLinks}</h3>
             <a href="#top">{menuLabels.home}</a>
             <a href="#schemeList">{menuLabels.allSchemes}</a>
+            <a href="#districtOffices">{menuLabels.offices}</a>
             <a href="#schemes">{text.findScheme}</a>
             <a href="#quickHelp">{menuLabels.documents}</a>
           </section>
@@ -603,9 +833,23 @@ export default function Home() {
   );
 }
 
-function SchemeCard({ scheme, language }: { scheme: Scheme; language: Language }) {
+function SchemeCard({
+  scheme,
+  language,
+  officeLabels
+}: {
+  scheme: Scheme;
+  language: Language;
+  officeLabels: {
+    person: string;
+    office: string;
+    schemeOfficeTitle: string;
+    schemeHint: string;
+  };
+}) {
   const text = language === "hi" ? cleanHindiCopy : copy.en;
   const category = categories.find((item) => item.id === scheme.category);
+  const officeGuidance = getOfficeGuidance(scheme);
   const easyInfo = easySchemeInfo[scheme.id];
   const isHindi = language === "hi";
   const displayName = language === "hi" && easyInfo ? easyInfo.nameHi : scheme.name[language];
@@ -654,6 +898,21 @@ function SchemeCard({ scheme, language }: { scheme: Scheme; language: Language }
           <p>{easyText}</p>
         </div>
       ) : null}
+
+      <div className="office-help">
+        <h4>{officeLabels.schemeOfficeTitle}</h4>
+        <p>{officeLabels.schemeHint}</p>
+        <dl>
+          <div>
+            <dt>{officeLabels.office}</dt>
+            <dd>{language === "hi" ? officeGuidance.officeHi : officeGuidance.officeEn}</dd>
+          </div>
+          <div>
+            <dt>{officeLabels.person}</dt>
+            <dd>{language === "hi" ? officeGuidance.officerHi : officeGuidance.officerEn}</dd>
+          </div>
+        </dl>
+      </div>
 
       <div className="detail-columns">
         <DetailBlock title={text.benefit} items={benefitItems} />

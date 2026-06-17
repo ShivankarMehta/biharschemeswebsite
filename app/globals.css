@@ -28,7 +28,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -261,6 +262,7 @@ main {
 .notice,
 .stats,
 .controls,
+.district-office-panel,
 .quick-help {
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -452,6 +454,113 @@ main {
   font-size: 0.75rem;
 }
 
+.district-office-panel {
+  display: grid;
+  gap: 18px;
+  padding: 26px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  scroll-margin-top: 18px;
+}
+
+.district-office-panel__intro {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 320px);
+  gap: 20px;
+  align-items: end;
+}
+
+.district-office-panel h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  line-height: 1.08;
+}
+
+.district-office-panel p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.district-select {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.district-select select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--ink);
+  background: #f8faf8;
+}
+
+.district-contact-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid #cfe1d5;
+  border-radius: 8px;
+  background: #f2f8f4;
+}
+
+.district-contact-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.district-contact-card__actions {
+  display: grid;
+  gap: 10px;
+}
+
+.district-contact-card__actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--green);
+  text-decoration: none;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.district-contact-card__actions a + a {
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.office-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.office-type-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.office-type-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.office-type-card p {
+  margin: 6px 0 0;
+}
+
 .scheme-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -530,6 +639,54 @@ main {
 .easy-explainer p {
   color: #3d4a37;
   font-weight: 700;
+}
+
+.office-help {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #cfe1d5;
+  border-left: 5px solid var(--green);
+  border-radius: 8px;
+  background: #f2f8f4;
+}
+
+.office-help h4,
+.office-help p,
+.office-help dl,
+.office-help dd {
+  margin: 0;
+}
+
+.office-help h4 {
+  font-size: 1rem;
+}
+
+.office-help p {
+  color: #35483d;
+  font-weight: 700;
+}
+
+.office-help dl {
+  display: grid;
+  gap: 8px;
+}
+
+.office-help dl div {
+  display: grid;
+  gap: 2px;
+}
+
+.office-help dt {
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.office-help dd {
+  color: var(--ink);
+  font-weight: 800;
 }
 
 .detail-columns {
@@ -781,6 +938,9 @@ main {
   .help-steps,
   .scheme-grid,
   .quick-help,
+  .district-office-panel__intro,
+  .district-contact-card,
+  .office-type-grid,
   .detail-columns,
   .scheme-name-list,
   .site-footer__inner {
@@ -841,6 +1001,7 @@ main {
   .stats article,
   .help-steps article,
   .controls,
+  .district-office-panel,
   .quick-help,
   .scheme-card,
   .scheme-list-panel {
@@ -848,14 +1009,16 @@ main {
   }
 
   .hero__actions,
-  .card-actions {
+  .card-actions,
+  .district-contact-card__actions {
     display: grid;
     grid-template-columns: 1fr;
   }
 
   .primary-link,
   .ghost-link,
-  .card-actions a {
+  .card-actions a,
+  .district-contact-card__actions a {
     width: 100%;
   }
 
