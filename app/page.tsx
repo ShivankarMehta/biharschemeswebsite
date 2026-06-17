@@ -292,6 +292,19 @@ const officeLocationTemplates = [
     askEn: "BDO, Panchayat Secretary, or housing/pension assistant"
   }
 ];
+
+const officeLocationKeyByCategory: Record<string, string> = {
+  education: "education",
+  youth: "drcc",
+  women: "social-security",
+  farmers: "agriculture",
+  health: "health",
+  housing: "block",
+  pension: "social-security",
+  food: "supply",
+  business: "industry",
+  workers: "labour"
+};
 const easySchemeInfo: Record<string, { nameHi: string; easyHi: string; easyEn: string }> = {
   "bihar-student-credit-card": {
     nameHi: "बिहार स्टूडेंट क्रेडिट कार्ड योजना",
@@ -499,6 +512,21 @@ function getSimplePointsHi() {
 
 function getOfficeGuidance(scheme: Scheme) {
   return officeGuidanceByCategory[scheme.category] ?? officeGuidanceByCategory.workers;
+}
+
+function getOfficeLocationForCategory(categoryId: string) {
+  const officeKey = officeLocationKeyByCategory[categoryId] ?? "collectorate";
+  return officeLocationTemplates.find((office) => office.key === officeKey) ?? officeLocationTemplates[0];
+}
+
+function getDistrictOfficeAddress(
+  office: (typeof officeLocationTemplates)[number],
+  district: (typeof districts)[number],
+  language: Language
+) {
+  return language === "hi"
+    ? `${office.addressHi}, ${district.nameHi}, बिहार`
+    : `${office.addressEn}, ${district.nameEn}, Bihar`;
 }
 
 function getOfficeMapUrl(officeName: string, districtName: string) {
@@ -862,10 +890,7 @@ export default function Home() {
                 {officeLocationTemplates.map((office) => {
                   const officeName = language === "hi" ? office.titleHi : office.titleEn;
                   const searchOfficeName = office.titleEn;
-                  const address =
-                    language === "hi"
-                      ? `${office.addressHi}, ${selectedDistrict.nameHi}, बिहार`
-                      : `${office.addressEn}, ${selectedDistrict.nameEn}, Bihar`;
+                  const address = getDistrictOfficeAddress(office, selectedDistrict, language);
                   return (
                     <article className="office-address-card" key={office.key}>
                       <div>
@@ -909,7 +934,13 @@ export default function Home() {
 
         <section className="scheme-grid" aria-live="polite">
           {visibleSchemes.map((scheme) => (
-            <SchemeCard scheme={scheme} language={language} officeLabels={officeLabels} key={scheme.id} />
+            <SchemeCard
+              scheme={scheme}
+              language={language}
+              officeLabels={officeLabels}
+              selectedDistrict={selectedDistrict}
+              key={scheme.id}
+            />
           ))}
         </section>
 
@@ -999,20 +1030,27 @@ export default function Home() {
 function SchemeCard({
   scheme,
   language,
-  officeLabels
+  officeLabels,
+  selectedDistrict
 }: {
   scheme: Scheme;
   language: Language;
   officeLabels: {
+    addressLabel: string;
+    mapLink: string;
     person: string;
     office: string;
     schemeOfficeTitle: string;
     schemeHint: string;
   };
+  selectedDistrict: (typeof districts)[number];
 }) {
   const text = language === "hi" ? cleanHindiCopy : copy.en;
   const category = categories.find((item) => item.id === scheme.category);
   const officeGuidance = getOfficeGuidance(scheme);
+  const officeLocation = getOfficeLocationForCategory(scheme.category);
+  const officeLocationName = language === "hi" ? officeLocation.titleHi : officeLocation.titleEn;
+  const officeAddress = getDistrictOfficeAddress(officeLocation, selectedDistrict, language);
   const easyInfo = easySchemeInfo[scheme.id];
   const isHindi = language === "hi";
   const displayName = language === "hi" && easyInfo ? easyInfo.nameHi : scheme.name[language];
@@ -1071,10 +1109,17 @@ function SchemeCard({
             <dd>{language === "hi" ? officeGuidance.officeHi : officeGuidance.officeEn}</dd>
           </div>
           <div>
+            <dt>{officeLabels.addressLabel}</dt>
+            <dd>{officeLocationName}: {officeAddress}</dd>
+          </div>
+          <div>
             <dt>{officeLabels.person}</dt>
             <dd>{language === "hi" ? officeGuidance.officerHi : officeGuidance.officerEn}</dd>
           </div>
         </dl>
+        <a className="office-help__map" href={getOfficeMapUrl(officeLocation.titleEn, selectedDistrict.nameEn)} target="_blank" rel="noopener noreferrer">
+          {officeLabels.mapLink}
+        </a>
       </div>
 
       <div className="detail-columns">
