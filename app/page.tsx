@@ -531,7 +531,9 @@ export default function Home() {
         : "\u0907\u0938 \u0938\u0942\u091a\u0940 \u0915\u094b \u0915\u092e \u0915\u0930\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0928\u0940\u091a\u0947 \u0938\u0930\u094d\u091a \u092c\u093e\u0930 \u0914\u0930 \u092b\u093f\u0932\u094d\u091f\u0930 \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0947\u0902.",
     showing: language === "en" ? "Showing" : "\u0926\u093f\u0916 \u0930\u0939\u0940 \u0939\u0948\u0902",
     of: language === "en" ? "of" : "\u0915\u0941\u0932",
-    schemes: language === "en" ? "schemes" : "\u092f\u094b\u091c\u0928\u093e\u090f\u0902"
+    schemes: language === "en" ? "schemes" : "\u092f\u094b\u091c\u0928\u093e\u090f\u0902",
+    expandList: language === "en" ? "Open list" : "सूची खोलें",
+    collapseList: language === "en" ? "Close list" : "सूची बंद करें"
   };
   const officeLabels = {
     kicker: language === "en" ? "District help" : "जिले में सहायता",
@@ -553,6 +555,8 @@ export default function Home() {
         : "इन पते वाली पंक्तियों से सही कार्यालय तक पहुंचें। मैप बटन चुने हुए जिले में उस कार्यालय की नई लाइव लोकेशन खोलता है।",
     addressLabel: language === "en" ? "Address" : "पता",
     mapLink: language === "en" ? "Open exact map location" : "सटीक लोकेशन मैप में खोलें",
+    expandOffices: language === "en" ? "Open office details" : "कार्यालय जानकारी खोलें",
+    collapseOffices: language === "en" ? "Close office details" : "कार्यालय जानकारी बंद करें",
     mainOffice: language === "en" ? "Main office to start" : "सबसे पहले यहां पूछें",
     mainOfficeText:
       language === "en"
@@ -770,34 +774,56 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="scheme-list-panel" id="schemeList" aria-label={menuLabels.listTitle}>
-          <div className="scheme-list-panel__head">
-            <div>
-              <p className="section-kicker">{menuLabels.allSchemes}</p>
-              <h2>{menuLabels.listTitle}</h2>
-              <p>{menuLabels.listHelp}</p>
+        <details className="scheme-list-panel collapsible-panel" id="schemeList" aria-label={menuLabels.listTitle}>
+          <summary className="collapsible-summary">
+            <div className="scheme-list-panel__head">
+              <div>
+                <p className="section-kicker">{menuLabels.allSchemes}</p>
+                <h2>{menuLabels.listTitle}</h2>
+                <p>{menuLabels.listHelp}</p>
+              </div>
+              <div className="summary-side">
+                <strong>
+                  {menuLabels.showing} {visibleSchemes.length} {menuLabels.of} {schemes.length} {menuLabels.schemes}
+                </strong>
+                <span className="summary-action">
+                  <span className="summary-action__open">{menuLabels.expandList}</span>
+                  <span className="summary-action__close">{menuLabels.collapseList}</span>
+                </span>
+              </div>
             </div>
-            <strong>
-              {menuLabels.showing} {visibleSchemes.length} {menuLabels.of} {schemes.length} {menuLabels.schemes}
-            </strong>
+          </summary>
+          <div className="collapsible-body">
+            <div className="scheme-name-list">
+              {visibleSchemes.map((scheme, index) => (
+                <a href={`#${scheme.id}`} key={scheme.id}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {getSchemeDisplayName(scheme, language)}
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="scheme-name-list">
-            {visibleSchemes.map((scheme, index) => (
-              <a href={`#${scheme.id}`} key={scheme.id}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {getSchemeDisplayName(scheme, language)}
-              </a>
-            ))}
-          </div>
-        </section>
+        </details>
 
-        <section className="district-office-panel" id="districtOffices">
-          <div className="district-office-panel__intro">
-            <div>
-              <p className="section-kicker">{officeLabels.kicker}</p>
-              <h2>{officeLabels.title}</h2>
-              <p>{officeLabels.intro}</p>
+        <details className="district-office-panel collapsible-panel" id="districtOffices">
+          <summary className="collapsible-summary">
+            <div className="district-office-panel__intro">
+              <div>
+                <p className="section-kicker">{officeLabels.kicker}</p>
+                <h2>{officeLabels.title}</h2>
+                <p>{officeLabels.intro}</p>
+              </div>
+              <div className="summary-side">
+                <strong>{language === "hi" ? selectedDistrict.nameHi : selectedDistrict.nameEn}</strong>
+                <span className="summary-action">
+                  <span className="summary-action__open">{officeLabels.expandOffices}</span>
+                  <span className="summary-action__close">{officeLabels.collapseOffices}</span>
+                </span>
+              </div>
             </div>
+          </summary>
+
+          <div className="collapsible-body">
             <label className="district-select">
               <span>{officeLabels.chooseDistrict}</span>
               <select value={selectedDistrictId} onChange={(event) => setSelectedDistrictId(event.target.value)}>
@@ -808,78 +834,78 @@ export default function Home() {
                 ))}
               </select>
             </label>
-          </div>
 
-          <div className="district-contact-card">
-            <div>
-              <h3>{language === "hi" ? selectedDistrict.nameHi : selectedDistrict.nameEn}</h3>
-              <p>
-                <strong>{officeLabels.mainOffice}:</strong> {officeLabels.mainOfficeText}
-              </p>
-              <p>{officeLabels.note}</p>
+            <div className="district-contact-card">
+              <div>
+                <h3>{language === "hi" ? selectedDistrict.nameHi : selectedDistrict.nameEn}</h3>
+                <p>
+                  <strong>{officeLabels.mainOffice}:</strong> {officeLabels.mainOfficeText}
+                </p>
+                <p>{officeLabels.note}</p>
+              </div>
+              <div className="district-contact-card__actions">
+                <a href={selectedDistrict.website} target="_blank" rel="noopener noreferrer">
+                  {officeLabels.officialSite}
+                </a>
+                <a href={`${selectedDistrict.website}/contact-us/`} target="_blank" rel="noopener noreferrer">
+                  {officeLabels.contactPage}
+                </a>
+              </div>
             </div>
-            <div className="district-contact-card__actions">
-              <a href={selectedDistrict.website} target="_blank" rel="noopener noreferrer">
-                {officeLabels.officialSite}
-              </a>
-              <a href={`${selectedDistrict.website}/contact-us/`} target="_blank" rel="noopener noreferrer">
-                {officeLabels.contactPage}
-              </a>
-            </div>
-          </div>
 
-          <div className="office-address-section">
-            <div>
-              <h3>{officeLabels.addressTitle}</h3>
-              <p>{officeLabels.addressIntro}</p>
+            <div className="office-address-section">
+              <div>
+                <h3>{officeLabels.addressTitle}</h3>
+                <p>{officeLabels.addressIntro}</p>
+              </div>
+              <div className="office-address-list">
+                {officeLocationTemplates.map((office) => {
+                  const officeName = language === "hi" ? office.titleHi : office.titleEn;
+                  const searchOfficeName = office.titleEn;
+                  const address =
+                    language === "hi"
+                      ? `${office.addressHi}, ${selectedDistrict.nameHi}, बिहार`
+                      : `${office.addressEn}, ${selectedDistrict.nameEn}, Bihar`;
+                  return (
+                    <article className="office-address-card" key={office.key}>
+                      <div>
+                        <h4>{officeName}</h4>
+                        <p>
+                          <strong>{officeLabels.addressLabel}:</strong> {address}
+                        </p>
+                        <p>
+                          <strong>{officeLabels.person}:</strong> {language === "hi" ? office.askHi : office.askEn}
+                        </p>
+                      </div>
+                      <a href={getOfficeMapUrl(searchOfficeName, selectedDistrict.nameEn)} target="_blank" rel="noopener noreferrer">
+                        {officeLabels.mapLink}
+                      </a>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
-            <div className="office-address-list">
-              {officeLocationTemplates.map((office) => {
-                const officeName = language === "hi" ? office.titleHi : office.titleEn;
-                const searchOfficeName = office.titleEn;
-                const address =
-                  language === "hi"
-                    ? `${office.addressHi}, ${selectedDistrict.nameHi}, बिहार`
-                    : `${office.addressEn}, ${selectedDistrict.nameEn}, Bihar`;
+
+            <div className="office-type-grid">
+              {categories.map((category) => {
+                const guidance = officeGuidanceByCategory[category.id];
+                if (!guidance) return null;
                 return (
-                  <article className="office-address-card" key={office.key}>
-                    <div>
-                      <h4>{officeName}</h4>
-                      <p>
-                        <strong>{officeLabels.addressLabel}:</strong> {address}
-                      </p>
-                      <p>
-                        <strong>{officeLabels.person}:</strong> {language === "hi" ? office.askHi : office.askEn}
-                      </p>
-                    </div>
-                    <a href={getOfficeMapUrl(searchOfficeName, selectedDistrict.nameEn)} target="_blank" rel="noopener noreferrer">
-                      {officeLabels.mapLink}
-                    </a>
+                  <article className="office-type-card" key={category.id}>
+                    <h3>{getCategoryDisplayName(category, language)}</h3>
+                    <p>
+                      <strong>{officeLabels.office}:</strong> {language === "hi" ? guidance.officeHi : guidance.officeEn}
+                    </p>
+                    <p>
+                      <strong>{officeLabels.person}:</strong>{" "}
+                      {language === "hi" ? guidance.officerHi : guidance.officerEn}
+                    </p>
                   </article>
                 );
               })}
             </div>
           </div>
-
-          <div className="office-type-grid">
-            {categories.map((category) => {
-              const guidance = officeGuidanceByCategory[category.id];
-              if (!guidance) return null;
-              return (
-                <article className="office-type-card" key={category.id}>
-                  <h3>{getCategoryDisplayName(category, language)}</h3>
-                  <p>
-                    <strong>{officeLabels.office}:</strong> {language === "hi" ? guidance.officeHi : guidance.officeEn}
-                  </p>
-                  <p>
-                    <strong>{officeLabels.person}:</strong>{" "}
-                    {language === "hi" ? guidance.officerHi : guidance.officerEn}
-                  </p>
-                </article>
-              );
-            })}
-          </div>
-        </section>
+        </details>
 
         <section className="scheme-grid" aria-live="polite">
           {visibleSchemes.map((scheme) => (
