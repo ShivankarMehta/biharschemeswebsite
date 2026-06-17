@@ -199,6 +199,99 @@ const officeGuidanceByCategory: Record<
     hintEn: "Worker schemes usually need work details, age, bank account, and a working mobile number."
   }
 };
+
+const officeLocationTemplates = [
+  {
+    key: "collectorate",
+    titleHi: "जिला समाहरणालय / DM कार्यालय",
+    titleEn: "District Collectorate / DM Office",
+    addressHi: "जिला समाहरणालय परिसर",
+    addressEn: "District Collectorate campus",
+    askHi: "हेल्प डेस्क, जन शिकायत शाखा या संबंधित विभाग का काउंटर",
+    askEn: "Help desk, public grievance branch, or the relevant department counter"
+  },
+  {
+    key: "drcc",
+    titleHi: "DRCC केंद्र",
+    titleEn: "DRCC Centre",
+    addressHi: "जिला निबंधन एवं परामर्श केंद्र",
+    addressEn: "District Registration and Counselling Centre",
+    askHi: "DRCC प्रबंधक या योजना सहायक",
+    askEn: "DRCC Manager or scheme assistant"
+  },
+  {
+    key: "education",
+    titleHi: "जिला शिक्षा कार्यालय",
+    titleEn: "District Education Office",
+    addressHi: "जिला शिक्षा कार्यालय",
+    addressEn: "District Education Office",
+    askHi: "जिला शिक्षा पदाधिकारी या छात्रवृत्ति प्रभारी",
+    askEn: "District Education Officer or scholarship officer"
+  },
+  {
+    key: "agriculture",
+    titleHi: "जिला कृषि कार्यालय",
+    titleEn: "District Agriculture Office",
+    addressHi: "जिला कृषि कार्यालय",
+    addressEn: "District Agriculture Office",
+    askHi: "जिला कृषि पदाधिकारी या प्रखंड कृषि पदाधिकारी",
+    askEn: "District Agriculture Officer or Block Agriculture Officer"
+  },
+  {
+    key: "health",
+    titleHi: "सिविल सर्जन / जिला स्वास्थ्य कार्यालय",
+    titleEn: "Civil Surgeon / District Health Office",
+    addressHi: "सिविल सर्जन कार्यालय या जिला स्वास्थ्य समिति",
+    addressEn: "Civil Surgeon Office or District Health Society",
+    askHi: "सिविल सर्जन, आयुष्मान मित्र या स्वास्थ्य योजना प्रभारी",
+    askEn: "Civil Surgeon, Ayushman Mitra, or health scheme officer"
+  },
+  {
+    key: "supply",
+    titleHi: "जिला / प्रखंड आपूर्ति कार्यालय",
+    titleEn: "District / Block Supply Office",
+    addressHi: "जिला आपूर्ति कार्यालय या प्रखंड आपूर्ति कार्यालय",
+    addressEn: "District Supply Office or Block Supply Office",
+    askHi: "जिला आपूर्ति पदाधिकारी या प्रखंड आपूर्ति पदाधिकारी",
+    askEn: "District Supply Officer or Block Supply Officer"
+  },
+  {
+    key: "industry",
+    titleHi: "जिला उद्योग केंद्र",
+    titleEn: "District Industries Centre",
+    addressHi: "जिला उद्योग केंद्र",
+    addressEn: "District Industries Centre",
+    askHi: "महाप्रबंधक, जिला उद्योग केंद्र या उद्यमी योजना प्रभारी",
+    askEn: "General Manager, DIC, or enterprise scheme officer"
+  },
+  {
+    key: "labour",
+    titleHi: "जिला श्रम कार्यालय",
+    titleEn: "District Labour Office",
+    addressHi: "जिला श्रम कार्यालय",
+    addressEn: "District Labour Office",
+    askHi: "श्रम अधीक्षक या श्रमिक पंजीकरण प्रभारी",
+    askEn: "Labour Superintendent or worker registration officer"
+  },
+  {
+    key: "social-security",
+    titleHi: "सामाजिक सुरक्षा / कल्याण कार्यालय",
+    titleEn: "Social Security / Welfare Office",
+    addressHi: "जिला सामाजिक सुरक्षा कोषांग या जिला कल्याण कार्यालय",
+    addressEn: "District Social Security Cell or District Welfare Office",
+    askHi: "सामाजिक सुरक्षा सहायक निदेशक या जिला कल्याण पदाधिकारी",
+    askEn: "Assistant Director Social Security or District Welfare Officer"
+  },
+  {
+    key: "block",
+    titleHi: "प्रखंड विकास कार्यालय",
+    titleEn: "Block Development Office",
+    addressHi: "अपने प्रखंड का BDO कार्यालय",
+    addressEn: "Your Block Development Office",
+    askHi: "BDO, पंचायत सचिव या आवास/पेंशन सहायक",
+    askEn: "BDO, Panchayat Secretary, or housing/pension assistant"
+  }
+];
 const easySchemeInfo: Record<string, { nameHi: string; easyHi: string; easyEn: string }> = {
   "bihar-student-credit-card": {
     nameHi: "बिहार स्टूडेंट क्रेडिट कार्ड योजना",
@@ -408,6 +501,10 @@ function getOfficeGuidance(scheme: Scheme) {
   return officeGuidanceByCategory[scheme.category] ?? officeGuidanceByCategory.workers;
 }
 
+function getOfficeMapUrl(officeName: string, districtName: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${officeName}, ${districtName}, Bihar`)}`;
+}
+
 export default function Home() {
   const [language, setLanguage] = useState<Language>("hi");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -449,6 +546,13 @@ export default function Home() {
     chooseDistrict: language === "en" ? "Select district" : "जिला चुनें",
     officialSite: language === "en" ? "Official district website" : "आधिकारिक जिला वेबसाइट",
     contactPage: language === "en" ? "Contact / directory page" : "संपर्क / कार्यालय निर्देशिका",
+    addressTitle: language === "en" ? "Office addresses for selected district" : "चुने हुए जिले के कार्यालयों के पते",
+    addressIntro:
+      language === "en"
+        ? "Use these location rows to reach the correct office. The map button opens the latest live location for that office in the selected district."
+        : "इन पते वाली पंक्तियों से सही कार्यालय तक पहुंचें। मैप बटन चुने हुए जिले में उस कार्यालय की नई लाइव लोकेशन खोलता है।",
+    addressLabel: language === "en" ? "Address" : "पता",
+    mapLink: language === "en" ? "Open exact map location" : "सटीक लोकेशन मैप में खोलें",
     mainOffice: language === "en" ? "Main office to start" : "सबसे पहले यहां पूछें",
     mainOfficeText:
       language === "en"
@@ -721,6 +825,39 @@ export default function Home() {
               <a href={`${selectedDistrict.website}/contact-us/`} target="_blank" rel="noopener noreferrer">
                 {officeLabels.contactPage}
               </a>
+            </div>
+          </div>
+
+          <div className="office-address-section">
+            <div>
+              <h3>{officeLabels.addressTitle}</h3>
+              <p>{officeLabels.addressIntro}</p>
+            </div>
+            <div className="office-address-list">
+              {officeLocationTemplates.map((office) => {
+                const officeName = language === "hi" ? office.titleHi : office.titleEn;
+                const searchOfficeName = office.titleEn;
+                const address =
+                  language === "hi"
+                    ? `${office.addressHi}, ${selectedDistrict.nameHi}, बिहार`
+                    : `${office.addressEn}, ${selectedDistrict.nameEn}, Bihar`;
+                return (
+                  <article className="office-address-card" key={office.key}>
+                    <div>
+                      <h4>{officeName}</h4>
+                      <p>
+                        <strong>{officeLabels.addressLabel}:</strong> {address}
+                      </p>
+                      <p>
+                        <strong>{officeLabels.person}:</strong> {language === "hi" ? office.askHi : office.askEn}
+                      </p>
+                    </div>
+                    <a href={getOfficeMapUrl(searchOfficeName, selectedDistrict.nameEn)} target="_blank" rel="noopener noreferrer">
+                      {officeLabels.mapLink}
+                    </a>
+                  </article>
+                );
+              })}
             </div>
           </div>
 

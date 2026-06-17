@@ -539,6 +539,61 @@ main {
   border: 1px solid var(--line);
 }
 
+.office-address-section {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.office-address-section h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.office-address-list {
+  display: grid;
+  gap: 10px;
+}
+
+.office-address-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8faf8;
+}
+
+.office-address-card h4 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.office-address-card p {
+  margin: 4px 0 0;
+}
+
+.office-address-card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  color: var(--blue);
+  background: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .office-type-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -940,6 +995,7 @@ main {
   .quick-help,
   .district-office-panel__intro,
   .district-contact-card,
+  .office-address-card,
   .office-type-grid,
   .detail-columns,
   .scheme-name-list,
@@ -1010,6 +1066,7 @@ main {
 
   .hero__actions,
   .card-actions,
+  .office-address-card a,
   .district-contact-card__actions {
     display: grid;
     grid-template-columns: 1fr;
@@ -1018,6 +1075,7 @@ main {
   .primary-link,
   .ghost-link,
   .card-actions a,
+  .office-address-card a,
   .district-contact-card__actions a {
     width: 100%;
   }
