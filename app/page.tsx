@@ -539,6 +539,7 @@ export default function Home() {
   const [activeGovernment, setActiveGovernment] = useState<"all" | "state" | "central">("all");
   const [query, setQuery] = useState("");
   const [selectedDistrictId, setSelectedDistrictId] = useState("patna");
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
   const selectedDistrict = districts.find((district) => district.id === selectedDistrictId) ?? districts[25];
 
   const text = language === "hi" ? cleanHindiCopy : copy.en;
@@ -562,7 +563,9 @@ export default function Home() {
     of: language === "en" ? "of" : "\u0915\u0941\u0932",
     schemes: language === "en" ? "schemes" : "\u092f\u094b\u091c\u0928\u093e\u090f\u0902",
     expandList: language === "en" ? "Open list" : "सूची खोलें",
-    collapseList: language === "en" ? "Close list" : "सूची बंद करें"
+    collapseList: language === "en" ? "Close list" : "सूची बंद करें",
+    expandWarning: language === "en" ? "Read warning" : "चेतावनी पढ़ें",
+    collapseWarning: language === "en" ? "Close warning" : "चेतावनी बंद करें"
   };
   const officeLabels = {
     kicker: language === "en" ? "District help" : "जिले में सहायता",
@@ -659,7 +662,9 @@ export default function Home() {
     note:
       language === "en"
         ? "This is public-safety information, not legal advice. Final sections and punishment depend on the police complaint, evidence, amount, role, and court decision."
-        : "यह जन-सुरक्षा जानकारी है, कानूनी सलाह नहीं। कौन सी धारा लगेगी और कितनी सजा होगी, यह शिकायत, सबूत, रकम, भूमिका और अदालत के फैसले पर निर्भर करता है।"
+        : "यह जन-सुरक्षा जानकारी है, कानूनी सलाह नहीं। कौन सी धारा लगेगी और कितनी सजा होगी, यह शिकायत, सबूत, रकम, भूमिका और अदालत के फैसले पर निर्भर करता है।",
+    modalTitle: language === "en" ? "Important disclaimer" : "जरूरी सावधानी",
+    modalButton: language === "en" ? "I understand" : "मैं समझ गया"
   };
   const illegalPractices =
     language === "en"
@@ -738,6 +743,25 @@ export default function Home() {
 
   return (
     <>
+      {showDisclaimer ? (
+        <div className="disclaimer-modal" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle">
+          <div className="disclaimer-modal__card">
+            <p className="section-kicker">{fraudLabels.kicker}</p>
+            <h2 id="disclaimerTitle">{fraudLabels.modalTitle}</h2>
+            <p>{fraudLabels.intro}</p>
+            <ul>
+              {illegalPractices.slice(0, 4).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="disclaimer-modal__note">{fraudLabels.note}</p>
+            <button type="button" onClick={() => setShowDisclaimer(false)}>
+              {fraudLabels.modalButton}
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <header className="hero">
         <Image
           className="hero__image"
@@ -828,14 +852,25 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="fraud-warning" id="fraudWarning">
-          <div className="fraud-warning__head">
-            <p className="section-kicker">{fraudLabels.kicker}</p>
-            <h2>{fraudLabels.title}</h2>
-            <p>{fraudLabels.intro}</p>
-          </div>
+        <details className="fraud-warning collapsible-panel" id="fraudWarning">
+          <summary className="collapsible-summary">
+            <div className="scheme-list-panel__head">
+              <div className="fraud-warning__head">
+                <p className="section-kicker">{fraudLabels.kicker}</p>
+                <h2>{fraudLabels.title}</h2>
+                <p>{fraudLabels.intro}</p>
+              </div>
+              <div className="summary-side">
+                <strong>{menuLabels.fraud}</strong>
+                <span className="summary-action">
+                  <span className="summary-action__open">{menuLabels.expandWarning}</span>
+                  <span className="summary-action__close">{menuLabels.collapseWarning}</span>
+                </span>
+              </div>
+            </div>
+          </summary>
 
-          <div className="fraud-grid">
+          <div className="fraud-grid collapsible-body">
             <article className="fraud-card fraud-card--danger">
               <h3>{fraudLabels.redFlags}</h3>
               <ul>
@@ -879,7 +914,7 @@ export default function Home() {
               </ol>
             </article>
           </div>
-        </section>
+        </details>
 
         <section className="controls" id="schemes" aria-label="Scheme search and filters">
           <div>
