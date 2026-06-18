@@ -263,6 +263,7 @@ main {
 .stats,
 .controls,
 .district-office-panel,
+.fraud-warning,
 .quick-help {
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -378,6 +379,108 @@ main {
   border-color: var(--green);
   background: var(--green);
   color: #fff;
+}
+
+.fraud-warning {
+  display: grid;
+  gap: 20px;
+  padding: 26px;
+  margin: 0 0 22px;
+  border: 1px solid #f0c7c2;
+  border-left: 6px solid var(--red);
+  border-radius: 8px;
+  scroll-margin-top: 18px;
+}
+
+.fraud-warning__head h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+  line-height: 1.08;
+}
+
+.fraud-warning__head p:not(.section-kicker) {
+  max-width: 900px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.fraud-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fraud-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.fraud-card--danger {
+  border-color: #efc8c3;
+  background: #fff7f6;
+}
+
+.fraud-card--law {
+  grid-column: span 2;
+  border-color: #cfe1d5;
+  background: #f7fbf8;
+}
+
+.fraud-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+}
+
+.fraud-card ul,
+.fraud-card ol {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.fraud-card li + li {
+  margin-top: 8px;
+}
+
+.scheme-warning-list,
+.law-list {
+  display: grid;
+  gap: 10px;
+}
+
+.scheme-warning-list div,
+.law-list div {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.scheme-warning-list div:first-child,
+.law-list div:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.scheme-warning-list strong,
+.law-list strong {
+  display: block;
+  color: var(--ink);
+}
+
+.scheme-warning-list p,
+.law-list p,
+.law-note {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.law-note {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #cfe1d5;
+  font-weight: 800;
 }
 
 .scheme-list-panel {
@@ -1068,6 +1171,7 @@ main {
 
   .stats,
   .help-steps,
+  .fraud-grid,
   .scheme-grid,
   .quick-help,
   .district-office-panel__intro,
@@ -1078,6 +1182,10 @@ main {
   .scheme-name-list,
   .site-footer__inner {
     grid-template-columns: 1fr;
+  }
+
+  .fraud-card--law {
+    grid-column: auto;
   }
 
   .footer-bottom {
@@ -1138,6 +1246,7 @@ main {
   .stats article,
   .help-steps article,
   .controls,
+  .fraud-warning,
   .district-office-panel,
   .quick-help,
   .scheme-card,

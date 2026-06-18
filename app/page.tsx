@@ -552,6 +552,7 @@ export default function Home() {
     allSchemes: language === "en" ? "Bihar schemes" : "\u092c\u093f\u0939\u093e\u0930 \u092f\u094b\u091c\u0928\u093e\u090f\u0902",
     documents: language === "en" ? "Documents" : "\u0926\u0938\u094d\u0924\u093e\u0935\u0947\u091c",
     offices: language === "en" ? "District offices" : "जिला कार्यालय",
+    fraud: language === "en" ? "Fraud warning" : "दलालों से सावधान",
     listTitle: language === "en" ? "Schemes for people of Bihar" : "\u092c\u093f\u0939\u093e\u0930 \u0915\u0947 \u0932\u094b\u0917\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u092f\u094b\u091c\u0928\u093e\u090f\u0902",
     listHelp:
       language === "en"
@@ -644,6 +645,86 @@ export default function Home() {
           : "केवल आधिकारिक आवेदन लिंक इस्तेमाल करें और आवेदन नंबर संभालकर रखें।"
     }
   ];
+  const fraudLabels = {
+    kicker: language === "en" ? "Stay safe" : "सावधान रहें",
+    title: language === "en" ? "Dalals cannot legally take extra money for schemes" : "योजना में दलाल द्वारा extra पैसा लेना गैर-कानूनी हो सकता है",
+    intro:
+      language === "en"
+        ? "Government scheme benefits are processed through official portals, banks, departments, CSCs, schools, hospitals, or local offices. Do not pay anyone who promises guaranteed approval, faster payment, fake eligibility, or backdoor entry."
+        : "सरकारी योजना का लाभ आधिकारिक पोर्टल, बैंक, विभाग, CSC, स्कूल, अस्पताल या स्थानीय कार्यालय की प्रक्रिया से मिलता है। जो व्यक्ति पक्का approval, जल्दी पैसा, नकली पात्रता या पीछे से काम कराने के नाम पर पैसा मांगे, उससे सावधान रहें।",
+    redFlags: language === "en" ? "Common illegal demands" : "दलालों की आम गलत मांगें",
+    schemeTricks: language === "en" ? "Scheme-wise red flags" : "योजना के हिसाब से सावधानी",
+    punishment: language === "en" ? "What can happen to dalals" : "दलाल पकड़े जाने पर क्या हो सकता है",
+    report: language === "en" ? "What citizens should do" : "लोग क्या करें",
+    note:
+      language === "en"
+        ? "This is public-safety information, not legal advice. Final sections and punishment depend on the police complaint, evidence, amount, role, and court decision."
+        : "यह जन-सुरक्षा जानकारी है, कानूनी सलाह नहीं। कौन सी धारा लगेगी और कितनी सजा होगी, यह शिकायत, सबूत, रकम, भूमिका और अदालत के फैसले पर निर्भर करता है।"
+  };
+  const illegalPractices =
+    language === "en"
+      ? [
+          "Asking for commission to submit a free or low-fee government application",
+          "Demanding money for guaranteed approval, faster DBT, pension, ration card, scholarship, house, loan, or hospital card",
+          "Taking Aadhaar, OTP, bank passbook, ATM card, SIM, password, or biometric access and misusing it",
+          "Preparing fake income, caste, residence, disability, land, marksheet, vendor, worker, or hospital documents",
+          "Pretending to be a government officer, bank employee, CSC operator, Ayushman worker, DRCC staff, or panchayat official",
+          "Keeping the beneficiary's login, application number, card, or money and refusing to return it"
+        ]
+      : [
+          "मुफ्त या कम-फीस वाले सरकारी आवेदन के लिए commission मांगना",
+          "DBT, पेंशन, राशन कार्ड, छात्रवृत्ति, घर, ऋण या आयुष्मान कार्ड में पक्का approval/जल्दी payment के नाम पर पैसा मांगना",
+          "आधार, OTP, बैंक पासबुक, ATM कार्ड, SIM, password या biometric लेकर उसका गलत इस्तेमाल करना",
+          "नकली आय, जाति, निवास, दिव्यांग, जमीन, मार्कशीट, vendor, worker या hospital document बनाना",
+          "खुद को सरकारी अधिकारी, बैंक कर्मचारी, CSC operator, Ayushman worker, DRCC staff या पंचायत अधिकारी बताना",
+          "लाभार्थी का login, application number, card या पैसा अपने पास रखकर वापस न देना"
+        ];
+  const schemeFraudWarnings =
+    language === "en"
+      ? [
+          { title: "Student, scholarship, and DRCC schemes", text: "No one can legally guarantee scholarship, student credit card sanction, or training seat by taking cash." },
+          { title: "Pension, ration, and certificates", text: "Do not pay for false age, caste, income, residence, family, or disability entries." },
+          { title: "Farmer and housing schemes", text: "Avoid anyone asking money to add fake land, PM-Kisan, PMAY, or subsidy eligibility." },
+          { title: "Ayushman and health schemes", text: "Hospitals or middlemen should not take cash for a cashless eligible treatment package outside official rules." },
+          { title: "Business, loan, and worker schemes", text: "A project report fee or service fee must be transparent; bribe or commission for approval is a red flag." }
+        ]
+      : [
+          { title: "छात्र, छात्रवृत्ति और DRCC योजनाएं", text: "कोई भी व्यक्ति cash लेकर scholarship, student credit card sanction या training seat की पक्की guarantee कानूनी रूप से नहीं दे सकता।" },
+          { title: "पेंशन, राशन और प्रमाण पत्र", text: "उम्र, जाति, आय, निवास, परिवार या दिव्यांगता की गलत entry कराने के लिए पैसा न दें।" },
+          { title: "किसान और आवास योजनाएं", text: "PM-Kisan, PMAY, subsidy या जमीन record में नकली पात्रता जोड़ने के नाम पर पैसा मांगना बड़ा red flag है।" },
+          { title: "आयुष्मान और स्वास्थ्य योजनाएं", text: "पात्र cashless इलाज में official rules से बाहर cash मांगने वाले hospital agent या middleman से सावधान रहें।" },
+          { title: "व्यवसाय, loan और श्रमिक योजनाएं", text: "Project report/service fee साफ और receipt वाली होनी चाहिए; approval के लिए bribe या commission मांगना गलत संकेत है।" }
+        ];
+  const legalConsequences =
+    language === "en"
+      ? [
+          { law: "BNS Section 318", text: "Cheating or dishonestly inducing delivery of money/property can lead to imprisonment and fine; aggravated cheating can extend up to 7 years." },
+          { law: "BNS Sections 336-340", text: "Forgery, forged certificates, forged electronic records, and using forged documents as genuine can lead to imprisonment and fine. Forgery of valuable security/receipt can be punished more severely." },
+          { law: "IT Act Sections 66C and 66D", text: "Misuse of identity, password, OTP, Aadhaar-linked digital access, or cheating through computer/phone can lead to imprisonment up to 3 years and fine." },
+          { law: "Prevention of Corruption Act", text: "If a public servant, or a middleman claiming influence over a public servant, takes undue advantage/bribe, imprisonment and fine can follow. Bribe-related offences can carry serious jail terms." },
+          { law: "Other consequences", text: "Police FIR, arrest, seizure of phone/documents, bank-account freezing, cancellation of fake application, recovery of money, blacklisting, and court trial may follow." }
+        ]
+      : [
+          { law: "BNS धारा 318", text: "धोखा देकर पैसा/संपत्ति दिलवाना या लेना cheating हो सकता है। सजा में जेल और जुर्माना हो सकता है; गंभीर cheating में सजा 7 साल तक जा सकती है।" },
+          { law: "BNS धारा 336-340", text: "नकली certificate, forged document/electronic record बनाना या उसे असली बताकर इस्तेमाल करना अपराध हो सकता है। valuable security/receipt जैसी forgery में सजा और कड़ी हो सकती है।" },
+          { law: "IT Act धारा 66C और 66D", text: "किसी का identity, password, OTP, Aadhaar-linked digital access या phone/computer से cheating करने पर 3 साल तक की जेल और जुर्माना हो सकता है।" },
+          { law: "Prevention of Corruption Act", text: "अगर public servant या officer पर influence बताने वाला middleman bribe/undue advantage लेता है, तो जेल और जुर्माना हो सकता है। रिश्वत से जुड़े मामलों में गंभीर सजा हो सकती है।" },
+          { law: "दूसरे परिणाम", text: "FIR, गिरफ्तारी, mobile/document जब्ती, bank account freeze, fake application cancel, पैसे की recovery, blacklist और court trial हो सकता है।" }
+        ];
+  const reportingSteps =
+    language === "en"
+      ? [
+          "Do not share OTP, password, ATM PIN, Aadhaar biometric, or original documents with an unknown person.",
+          "Ask for official receipt for any lawful service charge; never pay cash for guaranteed approval.",
+          "Save evidence: name, phone number, UPI ID, receipt, chat, call recording where lawful, application number, and witness details.",
+          "Complain to the concerned district office, police station, cybercrime helpline 1930 / cybercrime.gov.in for online fraud, or vigilance/anti-corruption office for bribe demand."
+        ]
+      : [
+          "OTP, password, ATM PIN, Aadhaar biometric या original document किसी अनजान व्यक्ति को न दें।",
+          "कानूनी service charge हो तो official receipt मांगें; पक्का approval के लिए cash कभी न दें।",
+          "सबूत रखें: नाम, mobile number, UPI ID, receipt, chat, call recording जहां कानूनन ठीक हो, application number और गवाह की जानकारी।",
+          "संबंधित जिला कार्यालय, थाना, online fraud में cybercrime helpline 1930 / cybercrime.gov.in, या bribe demand में vigilance/anti-corruption office में शिकायत करें।"
+        ];
 
   const visibleSchemes = useMemo(() => {
     const normalizedQuery = normalize(query.trim());
@@ -676,6 +757,7 @@ export default function Home() {
             <a href="#top">{menuLabels.home}</a>
             <a href="#schemeList">{menuLabels.allSchemes}</a>
             <a href="#districtOffices">{menuLabels.offices}</a>
+            <a href="#fraudWarning">{menuLabels.fraud}</a>
             <a href="#quickHelp">{menuLabels.documents}</a>
             <details className="scheme-menu">
               <summary>{menuLabels.menu}</summary>
@@ -744,6 +826,59 @@ export default function Home() {
               <p>{step.text}</p>
             </article>
           ))}
+        </section>
+
+        <section className="fraud-warning" id="fraudWarning">
+          <div className="fraud-warning__head">
+            <p className="section-kicker">{fraudLabels.kicker}</p>
+            <h2>{fraudLabels.title}</h2>
+            <p>{fraudLabels.intro}</p>
+          </div>
+
+          <div className="fraud-grid">
+            <article className="fraud-card fraud-card--danger">
+              <h3>{fraudLabels.redFlags}</h3>
+              <ul>
+                {illegalPractices.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="fraud-card">
+              <h3>{fraudLabels.schemeTricks}</h3>
+              <div className="scheme-warning-list">
+                {schemeFraudWarnings.map((warning) => (
+                  <div key={warning.title}>
+                    <strong>{warning.title}</strong>
+                    <p>{warning.text}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article className="fraud-card fraud-card--law">
+              <h3>{fraudLabels.punishment}</h3>
+              <div className="law-list">
+                {legalConsequences.map((item) => (
+                  <div key={item.law}>
+                    <strong>{item.law}</strong>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="law-note">{fraudLabels.note}</p>
+            </article>
+
+            <article className="fraud-card">
+              <h3>{fraudLabels.report}</h3>
+              <ol>
+                {reportingSteps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            </article>
+          </div>
         </section>
 
         <section className="controls" id="schemes" aria-label="Scheme search and filters">
@@ -974,6 +1109,7 @@ export default function Home() {
             <a href="#top">{menuLabels.home}</a>
             <a href="#schemeList">{menuLabels.allSchemes}</a>
             <a href="#districtOffices">{menuLabels.offices}</a>
+            <a href="#fraudWarning">{menuLabels.fraud}</a>
             <a href="#schemes">{text.findScheme}</a>
             <a href="#quickHelp">{menuLabels.documents}</a>
           </section>
